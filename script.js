@@ -33,7 +33,6 @@ function operate(operator, num1, num2) {
             return;
     }
     return result;
-
 }
 
 let displayValue = '';
@@ -57,42 +56,57 @@ numbers.forEach(number => {
 
 const addButton = document.querySelector('#add');
 addButton.addEventListener('click', function () {
-    operator = '+';
-    operand = displayValue;
-    displayValue = '';
+    if (displayValue != '') {
+        operator = '+';
+        operand = displayValue;
+        displayValue = '';
+    }
 });
 
 const subtractButton = document.querySelector('#subtract');
 subtractButton.addEventListener('click', function () {
-    operator = '-';
-    operand = displayValue;
-    displayValue = '';
+    if (displayValue != '') {
+        operator = '-';
+        operand = displayValue;
+        displayValue = '';
+    }
 });
 
 const multiplyButton = document.querySelector('#multiply');
 multiplyButton.addEventListener('click', function () {
-    operator = '*';
-    operand = displayValue;
-    displayValue = '';
+    if (displayValue != '') {
+        operator = '*';
+        operand = displayValue;
+        displayValue = '';
+    }
 });
 
 const divideButton = document.querySelector('#divide');
 divideButton.addEventListener('click', function () {
-    operator = '/';
-    operand = displayValue;
-    displayValue = '';
+    if (displayValue != '') {
+        operator = '/';
+        operand = displayValue;
+        displayValue = '';
+    }
 });
 
 const clearButton = document.querySelector('#clear');
 clearButton.addEventListener('click', function () {
-    displayValue = ''
-    operator = ''
-    display.textContent = '0'
+    displayValue = '';
+    operator = '';
+    display.textContent = '0';
 });
 
 const equals = document.querySelector('#equals');
 equals.addEventListener('click', function () {
-    result = operate(operator, parseFloat(operand), parseFloat(displayValue));
-    displayValue = result;
-    display.textContent = displayValue;
+    if (displayValue != '' && operator != '') {
+        result = operate(operator, parseFloat(operand), parseFloat(displayValue));
+        displayValue = result;
+        display.textContent = displayValue;
+        operator = '';
+    }
+    if (result === undefined) {
+        displayValue = '';
+        display.textContent = '0';
+    }
 });
