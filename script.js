@@ -23,8 +23,6 @@ function equalsOperation() {
     if (displayValue != '' && operator != '') {
         result = operate(operator, parseFloat(operand), parseFloat(displayValue));
         displayValue = result;
-        //may need to remove result equals null line to make everything work
-        result = null;
         operand = null;
         display.textContent = displayValue;
         operator = '';
@@ -135,7 +133,6 @@ equals.addEventListener('click', function () {
     if (displayValue != '' && operator != '') {
         result = operate(operator, parseFloat(operand), parseFloat(displayValue));
         displayValue = result;
-        result = null;
         operand = null;
         display.textContent = displayValue;
         operator = '';
