@@ -1,3 +1,8 @@
+let displayValue = '';
+let operator;
+let operand = null;
+let result = null;
+
 function add(a, b) {
     return a + b;
 }
@@ -14,31 +19,44 @@ function divide(a, b) {
     return a / b;
 }
 
+function equalsOperation() {
+    if (displayValue != '' && operator != '') {
+        result = operate(operator, parseFloat(operand), parseFloat(displayValue));
+        displayValue = result;
+        //may need to remove result equals null line to make everything work
+        result = null;
+        operand = null;
+        display.textContent = displayValue;
+        operator = '';
+    }
+    if (result === undefined) {
+        displayValue = '';
+        display.textContent = '0';
+    }
+}
+
 function operate(operator, num1, num2) {
-    let result;
+    let innerResult;
     switch (operator) {
         case '+':
-            result = add(num1, num2);
+            innerResult = add(num1, num2);
             break;
         case '-':
-            result = subtract(num1, num2);
+            innerResult = subtract(num1, num2);
             break;
         case '*':
-            result = multiply(num1, num2);
+            innerResult = multiply(num1, num2);
             break;
         case '/':
-            result = divide(num1, num2);
+            innerResult = divide(num1, num2);
             break;
         default:
             return;
     }
-    return result;
+    return innerResult;
 }
 
-let displayValue = '';
-let operand;
-let operator;
-let result = null;
+
 
 const display = document.querySelector('#display');
 const numbers = document.querySelectorAll('.number');
@@ -56,15 +74,22 @@ numbers.forEach(number => {
 
 const addButton = document.querySelector('#add');
 addButton.addEventListener('click', function () {
+    if (operand != null && displayValue != '') {
+        equalsOperation();
+    }
     if (displayValue != '') {
         operator = '+';
         operand = displayValue;
         displayValue = '';
     }
+
 });
 
 const subtractButton = document.querySelector('#subtract');
 subtractButton.addEventListener('click', function () {
+    if (operand != null && displayValue != '') {
+        equalsOperation();
+    }
     if (displayValue != '') {
         operator = '-';
         operand = displayValue;
@@ -74,6 +99,9 @@ subtractButton.addEventListener('click', function () {
 
 const multiplyButton = document.querySelector('#multiply');
 multiplyButton.addEventListener('click', function () {
+    if (operand != null && displayValue != '') {
+        equalsOperation();
+    }
     if (displayValue != '') {
         operator = '*';
         operand = displayValue;
@@ -83,6 +111,9 @@ multiplyButton.addEventListener('click', function () {
 
 const divideButton = document.querySelector('#divide');
 divideButton.addEventListener('click', function () {
+    if (operand != null && displayValue != '') {
+        equalsOperation();
+    }
     if (displayValue != '') {
         operator = '/';
         operand = displayValue;
@@ -94,6 +125,8 @@ const clearButton = document.querySelector('#clear');
 clearButton.addEventListener('click', function () {
     displayValue = '';
     operator = '';
+    operand = null;
+    result = null;
     display.textContent = '0';
 });
 
@@ -102,6 +135,8 @@ equals.addEventListener('click', function () {
     if (displayValue != '' && operator != '') {
         result = operate(operator, parseFloat(operand), parseFloat(displayValue));
         displayValue = result;
+        result = null;
+        operand = null;
         display.textContent = displayValue;
         operator = '';
     }
