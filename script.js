@@ -142,3 +142,38 @@ equals.addEventListener('click', function () {
         display.textContent = '0';
     }
 });
+
+const invert = document.querySelector('#invert');
+invert.addEventListener('click', function () {
+    if (displayValue != '') {
+        result = operate('*', parseFloat(-1), parseFloat(displayValue));
+        displayValue = result;
+        operand = null;
+        display.textContent = displayValue;
+        operator = '';
+    }
+});
+
+const percentage = document.querySelector('#percentage');
+percentage.addEventListener('click', function () {
+    if(displayValue != '') {
+        result = operate('/', parseFloat(displayValue), parseFloat(100));
+        displayValue = result;
+        display.textContent = displayValue;
+    }
+});
+
+const decimal = document.querySelector('#decimal');
+decimal.addEventListener('click', function () {
+    if (result === displayValue) {
+        displayValue = '';
+        result = null;
+    }
+    if (!displayValue.includes('.') && displayValue === '') {
+        displayValue = '0.'
+        display.textContent = displayValue;
+    } else if (!displayValue.includes('.')) {
+        displayValue += decimal.textContent;
+        display.textContent = displayValue;
+    }
+});
