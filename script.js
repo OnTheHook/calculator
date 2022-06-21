@@ -16,6 +16,9 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
+    if (b === 0) {
+        return 'Error'
+    }
     return a / b;
 }
 
@@ -27,9 +30,8 @@ function equalsOperation() {
         display.textContent = displayValue;
         operator = '';
     }
-    if (result === undefined) {
+    if (result === 'Error') {
         displayValue = '';
-        display.textContent = '0';
     }
 }
 
@@ -137,9 +139,8 @@ equals.addEventListener('click', function () {
         display.textContent = displayValue;
         operator = '';
     }
-    if (result === undefined) {
+    if (result === 'Error') {
         displayValue = '';
-        display.textContent = '0';
     }
 });
 
