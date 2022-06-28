@@ -68,6 +68,12 @@ numbers.forEach(number => {
             displayValue = '';
             result = null;
         }
+        if (displayValue === '0' && number.textContent === '0') {
+            return;
+        }
+        if (displayValue === '0') {
+            displayValue = ''
+        }
         displayValue += number.textContent;
         display.textContent = displayValue;
     });
@@ -158,7 +164,7 @@ invert.addEventListener('click', function () {
 
 const percentage = document.querySelector('#percentage');
 percentage.addEventListener('click', function () {
-    if(displayValue != '') {
+    if (displayValue != '') {
         result = operate('/', parseFloat(displayValue), parseFloat(100));
         displayValue = result;
         display.textContent = displayValue;
