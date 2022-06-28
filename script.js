@@ -53,6 +53,7 @@ function operate(operator, num1, num2) {
         default:
             return;
     }
+    innerResult = Math.round(innerResult * 100) / 100;
     return innerResult;
 }
 
