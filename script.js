@@ -25,6 +25,9 @@ function divide(a, b) {
 function equalsOperation() {
     if (displayValue != '' && operator != '') {
         result = operate(operator, parseFloat(operand), parseFloat(displayValue));
+        if (String(result).length >= 13) {
+            result = result.toExponential(6);
+        }
         displayValue = result;
         operand = null;
         display.textContent = displayValue;
@@ -77,6 +80,9 @@ numbers.forEach(number => {
         }
         if (displayValue === '0') {
             displayValue = ''
+        }
+        if (displayValue.length >= 12) {
+            return;
         }
         displayValue += number.textContent;
         display.textContent = displayValue;
@@ -145,6 +151,9 @@ const equals = document.querySelector('#equals');
 equals.addEventListener('click', function () {
     if (displayValue != '' && operator != '') {
         result = operate(operator, parseFloat(operand), parseFloat(displayValue));
+        if (String(result).length >= 13) {
+            result = result.toExponential(6);
+        }
         displayValue = result;
         operand = null;
         display.textContent = displayValue;
@@ -180,6 +189,9 @@ decimal.addEventListener('click', function () {
     if (result === displayValue) {
         displayValue = '';
         result = null;
+    }
+    if (displayValue.length >= 12) {
+        return;
     }
     if (!displayValue.includes('.') && displayValue === '') {
         displayValue = '0.'

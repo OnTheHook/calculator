@@ -34,7 +34,7 @@ body {
 }
 
 .display {
-    font-size: 90px;
+    font-size: 55px;
     display: flex;
     justify-content: flex-end;
 }
@@ -54,18 +54,39 @@ body {
 
 .number,
 .decimal {
+    color: white;
     background-color: #333333;
+    transition: all 0.07s;
 }
 
 .function {
     background-color: #a5a5a5;
     color: black;
+    transition: all 0.07s;
 }
 
 .operator {
+    color: white;
     background-color: #fe9f0a;
+    transition: all 0.07s;
 }
 
 #zero {
     width: 198px;    
 }
+
+.numberPressed{
+    color: #333333;
+    background-color: white;
+}
+
+.functionPressed {
+    color: #a5a5a5;
+    background-color: black;
+}
+
+.operatorPressed {
+    color: #fe9f0a;
+    background-color: white;
+}
+
