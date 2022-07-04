@@ -64,13 +64,30 @@ function operate(operator, num1, num2) {
     return innerResult;
 }
 
+function removeTransition(e) {
+    this.classList.remove('numberPressed');
+}
 
+function removeTransitionOperator(e) {
+    this.classList.remove('operatorPressed');
+}
+
+function removeTransitionFunction(e) {
+    this.classList.remove('functionPressed');
+}
 
 const display = document.querySelector('#display');
 const numbers = document.querySelectorAll('.number');
+const functs = document.querySelectorAll('.function');
+const operators = document.querySelectorAll('.operator');
+
+functs.forEach(funct => funct.addEventListener('transitionend', removeTransitionFunction));
+operators.forEach(operator => operator.addEventListener('transitionend', removeTransitionOperator));
+
 
 numbers.forEach(number => {
     number.addEventListener('click', function () {
+        number.classList.add('numberPressed');
         if (result === displayValue) {
             displayValue = '';
             result = null;
@@ -89,6 +106,8 @@ numbers.forEach(number => {
     });
 });
 
+numbers.forEach(number => number.addEventListener('transitionend', removeTransition));
+
 const addButton = document.querySelector('#add');
 addButton.addEventListener('click', function () {
     if (operand != null && displayValue != '') {
@@ -99,7 +118,7 @@ addButton.addEventListener('click', function () {
         operand = displayValue;
         displayValue = '';
     }
-
+    addButton.classList.add('operatorPressed');
 });
 
 const subtractButton = document.querySelector('#subtract');
@@ -112,6 +131,7 @@ subtractButton.addEventListener('click', function () {
         operand = displayValue;
         displayValue = '';
     }
+    subtractButton.classList.add('operatorPressed');
 });
 
 const multiplyButton = document.querySelector('#multiply');
@@ -124,6 +144,7 @@ multiplyButton.addEventListener('click', function () {
         operand = displayValue;
         displayValue = '';
     }
+    multiplyButton.classList.add('operatorPressed');
 });
 
 const divideButton = document.querySelector('#divide');
@@ -136,6 +157,7 @@ divideButton.addEventListener('click', function () {
         operand = displayValue;
         displayValue = '';
     }
+    divideButton.classList.add('operatorPressed');
 });
 
 const clearButton = document.querySelector('#clear');
@@ -145,6 +167,7 @@ clearButton.addEventListener('click', function () {
     operand = null;
     result = null;
     display.textContent = '0';
+    clearButton.classList.add('functionPressed');
 });
 
 const equals = document.querySelector('#equals');
@@ -164,6 +187,7 @@ equals.addEventListener('click', function () {
         operand = null;
         result = null;
     }
+    equals.classList.add('operatorPressed');
 });
 
 const invert = document.querySelector('#invert');
@@ -173,6 +197,7 @@ invert.addEventListener('click', function () {
         displayValue = result;
         display.textContent = displayValue;
     }
+    invert.classList.add('functionPressed');
 });
 
 const percentage = document.querySelector('#percentage');
@@ -182,10 +207,12 @@ percentage.addEventListener('click', function () {
         displayValue = result;
         display.textContent = displayValue;
     }
+    percentage.classList.add('functionPressed');
 });
 
 const decimal = document.querySelector('#decimal');
 decimal.addEventListener('click', function () {
+    decimal.classList.add('numberPressed');
     if (result === displayValue) {
         displayValue = '';
         result = null;
@@ -201,3 +228,5 @@ decimal.addEventListener('click', function () {
         display.textContent = displayValue;
     }
 });
+
+decimal.addEventListener('transitionend', removeTransition);

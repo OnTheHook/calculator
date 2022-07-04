@@ -50,6 +50,7 @@ body {
     justify-content: center;
     align-items: center;
     border-radius: 45px;
+    cursor: pointer;
 }
 
 .number,
