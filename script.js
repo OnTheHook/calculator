@@ -32,6 +32,8 @@ function equalsOperation() {
     }
     if (result === 'Error') {
         displayValue = '';
+        operand = null;
+        result = null;
     }
 }
 
@@ -53,7 +55,9 @@ function operate(operator, num1, num2) {
         default:
             return;
     }
-    innerResult = Math.round(innerResult * 100) / 100;
+    if (innerResult != 'Error') {
+        innerResult = Math.round(innerResult * 100) / 100;
+    }
     return innerResult;
 }
 
@@ -148,6 +152,8 @@ equals.addEventListener('click', function () {
     }
     if (result === 'Error') {
         displayValue = '';
+        operand = null;
+        result = null;
     }
 });
 
@@ -156,9 +162,7 @@ invert.addEventListener('click', function () {
     if (displayValue != '') {
         result = operate('*', parseFloat(-1), parseFloat(displayValue));
         displayValue = result;
-        operand = null;
         display.textContent = displayValue;
-        operator = '';
     }
 });
 
